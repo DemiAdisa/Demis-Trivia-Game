@@ -9,6 +9,7 @@ class GameScreenProvider extends ChangeNotifier {
 
   List? questions;
   int _currentQuestionCount = 0;
+  int _score = 0;
 
   BuildContext context;
 
@@ -37,6 +38,10 @@ class GameScreenProvider extends ChangeNotifier {
   Future<void> checkAnswer(String submittedValue) async {
     bool isCorrect =
         (submittedValue == questions![_currentQuestionCount]["correct_answer"]);
+
+    if(isCorrect) {
+      _score++;
+    }
 
     _currentQuestionCount++;
 
@@ -78,9 +83,12 @@ class GameScreenProvider extends ChangeNotifier {
                 color: Colors.white,
               ),
             ),
-            content: Text("Score: 0/0"),
+            content: Text("Score: $_score/$maxQuestions"),
           );
         });
+
+    _currentQuestionCount = 0;
+    _score = 0;
 
     await Future.delayed(Duration(seconds: 3));
 
