@@ -1,3 +1,4 @@
+import 'package:demis_trivia_game/screens/game_home.dart';
 import 'package:demis_trivia_game/screens/game_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,13 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           scaffoldBackgroundColor: Color.fromRGBO(31, 31, 31, 1.0),
         ),
-        home: GameScreen());
+        initialRoute: "/",
+        routes: {
+          // When navigating to the "/" route, build the FirstScreen widget.
+          '/': (context) => const GameHomeScreen(),
+          // When navigating to the "/second" route, build the SecondScreen widget.
+          '/Game_Screen': (context) => GameScreen(),
+        },
+    );
   }
 }

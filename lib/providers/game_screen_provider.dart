@@ -93,6 +93,6 @@ class GameScreenProvider extends ChangeNotifier {
     await Future.delayed(Duration(seconds: 3));
 
     Navigator.pop(context);
-    Navigator.pop(context);
+    Navigator.pushNamed(context, "/");
   }
 }
