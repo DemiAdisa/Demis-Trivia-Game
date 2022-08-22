@@ -5,17 +5,21 @@ import 'package:provider/provider.dart';
 class GameScreen extends StatelessWidget {
   double? _deviceHeight, _deviceWidth;
   final String difficulty;
+  final int maxQuestions;
 
   GameScreenProvider? _pageProvider;
 
-  GameScreen({required this.difficulty});
+  GameScreen({required this.maxQuestions, required this.difficulty});
 
   @override
   Widget build(BuildContext context) {
     _deviceHeight = MediaQuery.of(context).size.height;
     _deviceWidth = MediaQuery.of(context).size.width;
     return ChangeNotifierProvider(
-      create: (_context) => GameScreenProvider(context: _context, difficultyLvl: difficulty),
+      create: (_context) => GameScreenProvider(
+          context: _context,
+          difficultyLvl: difficulty,
+          maxQuestions: maxQuestions),
       child: _buildUI(),
     );
   }

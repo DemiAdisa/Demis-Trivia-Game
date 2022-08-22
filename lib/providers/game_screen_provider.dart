@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 
 class GameScreenProvider extends ChangeNotifier {
   final Dio _dio = Dio();
-  final int maxQuestions = 10;
+  final int maxQuestions;
   final String difficultyLvl;
 
   List? questions;
@@ -14,19 +14,21 @@ class GameScreenProvider extends ChangeNotifier {
 
   BuildContext context;
 
-  GameScreenProvider({required this.context, required this.difficultyLvl}) {
+  GameScreenProvider(
+      {required this.context,
+      required this.difficultyLvl,
+      required this.maxQuestions}) {
     _dio.options.baseUrl = "https://opentdb.com/api.php";
     _getQuestions();
     // print("hello");
   }
 
   Future<void> _getQuestions() async {
-
     print(difficultyLvl);
     var _response = await _dio.get(
       "",
       queryParameters: {
-        "amount": 10,
+        "amount": maxQuestions,
         "type": "boolean",
         "difficulty": difficultyLvl,
       },
@@ -85,7 +87,7 @@ class GameScreenProvider extends ChangeNotifier {
         builder: (BuildContext _context) {
           return AlertDialog(
             backgroundColor: Colors.blue,
-            title: Text(
+            title: const Text(
               "Game Over",
               style: TextStyle(
                 fontSize: 25,
@@ -95,7 +97,6 @@ class GameScreenProvider extends ChangeNotifier {
             content: Text("Score: $_score/$maxQuestions"),
           );
         });
-
 
     await Future.delayed(Duration(seconds: 3));
 
