@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 class GameScreenProvider extends ChangeNotifier {
   final Dio _dio = Dio();
   final int maxQuestions = 10;
+  final String difficultyLvl;
 
   List? questions;
   int _currentQuestionCount = 0;
@@ -13,16 +14,22 @@ class GameScreenProvider extends ChangeNotifier {
 
   BuildContext context;
 
-  GameScreenProvider({required this.context}) {
+  GameScreenProvider({required this.context, required this.difficultyLvl}) {
     _dio.options.baseUrl = "https://opentdb.com/api.php";
     _getQuestions();
     // print("hello");
   }
 
   Future<void> _getQuestions() async {
+
+    print(difficultyLvl);
     var _response = await _dio.get(
       "",
-      queryParameters: {"amount": 10, "type": "boolean", "difficulty": "easy"},
+      queryParameters: {
+        "amount": 10,
+        "type": "boolean",
+        "difficulty": difficultyLvl,
+      },
     );
 
     var _data = jsonDecode(_response.toString());
@@ -39,7 +46,7 @@ class GameScreenProvider extends ChangeNotifier {
     bool isCorrect =
         (submittedValue == questions![_currentQuestionCount]["correct_answer"]);
 
-    if(isCorrect) {
+    if (isCorrect) {
       _score++;
     }
 

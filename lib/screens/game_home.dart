@@ -1,3 +1,4 @@
+import 'package:demis_trivia_game/screens/game_screen.dart';
 import 'package:flutter/material.dart';
 
 class GameHomeScreen extends StatefulWidget {
@@ -8,10 +9,10 @@ class GameHomeScreen extends StatefulWidget {
 }
 
 class _GameHomeScreenState extends State<GameHomeScreen> {
-
   List<String>? difficultyLevels = ["Easy", "Medium", "Hard"];
 
   double _difficultyIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,9 +20,9 @@ class _GameHomeScreenState extends State<GameHomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text(
+            const Text(
               "Demi's Trivia Game",
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.white,
                 fontSize: 40,
                 fontWeight: FontWeight.w700,
@@ -35,7 +36,13 @@ class _GameHomeScreenState extends State<GameHomeScreen> {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, "/Game_Screen");
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => GameScreen(
+                          difficulty:
+                              difficultyLevels![_difficultyIndex.toInt()].toLowerCase()),
+                    ));
               },
               child: const Text("START"),
             )
