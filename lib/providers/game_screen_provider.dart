@@ -50,7 +50,6 @@ class GameScreenProvider extends ChangeNotifier {
 
     if (isCorrect) {
       _score++;
-      print("Score is $_score");
     }
 
     _currentQuestionCount++;
