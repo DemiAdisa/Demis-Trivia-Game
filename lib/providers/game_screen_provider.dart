@@ -48,6 +48,7 @@ class GameScreenProvider extends ChangeNotifier {
 
     if (isCorrect) {
       _score++;
+      print("Score is $_score");
     }
 
     _currentQuestionCount++;
@@ -80,6 +81,7 @@ class GameScreenProvider extends ChangeNotifier {
   Future<void> endGame() async {
     showDialog(
         context: context,
+        barrierDismissible: false,
         builder: (BuildContext _context) {
           return AlertDialog(
             backgroundColor: Colors.blue,
@@ -94,8 +96,6 @@ class GameScreenProvider extends ChangeNotifier {
           );
         });
 
-    _currentQuestionCount = 0;
-    _score = 0;
 
     await Future.delayed(Duration(seconds: 3));
 
